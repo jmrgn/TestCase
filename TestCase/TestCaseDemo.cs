@@ -136,7 +136,7 @@ namespace TestCase
             Assert.That(toTest == 1);
         }
 
-        // SLIDE 1
+        // Why? SLIDE 1
 
         [TestCase(1)]
         public void J_TestEnumAndInt(int testEnum)
@@ -152,14 +152,14 @@ namespace TestCase
             Assert.That(testEnum == TestEnum.One);
         }
         
-        // SLIDE 2
+        // Why? See: SLIDE 2
         
         [Test, TestCaseSource("TestCases")]
         public int K_WithTestCaseSource_NoConversion(StringList testData, int denominator)
         {
             var myTestWithArray = (StringArray)Convert.ChangeType(testData, typeof(StringArray));
 
-            var myTestInt = Convert.ToInt32(testData.MyStrings[0]);
+            var myTestInt = Convert.ToInt32(myTestWithArray.MyStrings[0]);
             return myTestInt / denominator;
         }
 
@@ -170,7 +170,7 @@ namespace TestCase
             return myTestInt / denominator;
         }
 
-        [TestCase(ExpectedException=typeof(ArgumentException))]
+        [TestCase(ExpectedException=typeof(NotSupportedException))]
         public void L_TestConversionException()
         {
             var defaultBinder = Type.DefaultBinder;
