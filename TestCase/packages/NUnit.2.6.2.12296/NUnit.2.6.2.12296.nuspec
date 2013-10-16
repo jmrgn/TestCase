@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>NUnit</id>
+    <version>2.6.2.12296</version>
+    <title>NUnit</title>
+    <authors>NUnit</authors>
+    <owners>NUnit</owners>
+    <projectUrl>http://www.nunit.org</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>NUnit with integration test addin</description>
+    <summary>NUnit with integration test addin</summary>
+  </metadata>
+</package>
