@@ -87,7 +87,9 @@ namespace TestCase
                 yield return new StringList(){ MyStrings = list};
             }
         }
-        
+
+        // More Complex?
+        // http://nunit.org/?p=testCaseSource&r=2.5
         [Test, TestCaseSource("TestCases")]
         public int G_WithTestCaseSource(StringList testData, int denominator)
         {
@@ -95,7 +97,7 @@ namespace TestCase
             return myTestInt / denominator;
         }
 
-
+        // Use Test Case data to set up more complex input/outputs
         public static IEnumerable TestCases
         {
             get
@@ -133,30 +135,29 @@ namespace TestCase
         {
             Assert.That(toTest == 1);
         }
-        
+
+        // SLIDE 1
+
         [TestCase(1)]
-        public void J_TestEnumAndInt(TestEnum testEnum)
+        public void J_TestEnumAndInt(int testEnum)
         {
-            var testBinder = Type.DefaultBinder;
-            var test = (int)Convert.ChangeType(1, typeof(TestEnum));
+            var test = (TestEnum)Convert.ChangeType(1, typeof(TestEnum));
+            Assert.That(test == TestEnum.One);
+        }
+
+        [TestCase(1)]
+        public void J_TestEnumAndIntB(TestEnum testEnum)
+        {
+            var test = (int)testEnum;
             Assert.That(testEnum == TestEnum.One);
         }
+        
+        // SLIDE 2
         
         [Test, TestCaseSource("TestCases")]
         public int K_WithTestCaseSource_NoConversion(StringList testData, int denominator)
         {
             var myTestWithArray = (StringArray)Convert.ChangeType(testData, typeof(StringArray));
-
-            try
-            {
-                var defaultBinder = Type.DefaultBinder;
-                defaultBinder.ChangeType(testData, typeof(StringArray), Thread.CurrentThread.CurrentCulture);
-            }
-            catch (Exception ex)
-            {
-
-            }
-            
 
             var myTestInt = Convert.ToInt32(testData.MyStrings[0]);
             return myTestInt / denominator;
@@ -174,22 +175,6 @@ namespace TestCase
         {
             var defaultBinder = Type.DefaultBinder;
             defaultBinder.ChangeType(test, typeof(StringArray), Thread.CurrentThread.CurrentCulture);
-        }
-
-        [Test, TestCaseSource("GetMyInts")] 
-        public void M_TestIntToEnumWIthGenerator(string myString) 
-        {
-            Assert.That(!String.IsNullOrEmpty(myString));
-        }
-
-
-        public static IEnumerable GetMyInts
-        {
-            get
-            {
-                yield return 1;
-                yield return 2;
-            }
         }
     }
 }
